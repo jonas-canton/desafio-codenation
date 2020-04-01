@@ -1,0 +1,17 @@
+{
+  "name": "challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "challenge.js",
+  "scripts": {
+    "start": "node challenge.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "form-data": "^3.0.0"
+  }
+}
