@@ -20,8 +20,11 @@ function getJsonData() {
             jsonObj.resumo_criptografico = shasum.digest('hex')
 
             fs.writeFile(fullPathJsonFile, JSON.stringify(jsonObj), err => {
-                console.log(err || 'File saved!')
-                postJsonData()
+                if (!err) {
+                    postJsonData()
+                } else {
+                    console.error('Error writing file:', err)
+                }
             })
         }).catch(err => {
             console.error('Response GET error:', err)
@@ -29,15 +32,15 @@ function getJsonData() {
 }
 
 function postJsonData() {
-    const form = new FormData();
-    form.append('answer', fs.createReadStream(fullPathJsonFile));
+    const formData = new FormData();
+    formData.append('answer', fs.createReadStream(fullPathJsonFile));
 
     axios({
         method: 'post',
         url: urlPost,
-        data: form,
+        data: formData,
         headers: {
-            'content-type': `multipart/form-data; boundary=${form._boundary}`,
+            'content-type': `multipart/form-data; boundary=${formData._boundary}`,
         },
     }).then(response => {
         console.log('Response POST success:', response)
