@@ -13,7 +13,6 @@ function getJsonData() {
         .then(response => {
             const jsonObj = response.data
             const textDecoded = decodeText(jsonObj.cifrado, jsonObj.numero_casas)
-            console.log(textDecoded)
             const shasum = crypto.createHash('sha1')
             shasum.update(textDecoded)
 
